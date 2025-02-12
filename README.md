@@ -1,5 +1,3 @@
-link streamlit : https://latihandicoding-ananisa.streamlit.app/
-
 RUN STREAMLIT APP
 streamlit run dashboard.py
 

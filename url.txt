@@ -1,0 +1,3 @@
+link streamlit : https://latihandicoding-ananisa.streamlit.app/
+
+link dokumentasi : https://colab.research.google.com/drive/1R29AEDg_gkRiXwycXBxLEVm1LllWNTT4?usp=sharing

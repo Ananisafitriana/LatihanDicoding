@@ -3,12 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-dataHari = pd.read_csv("day.csv")
-dataJam = pd.read_csv("hour.csv")
+dataHari = pd.read_csv("./data/day.csv")
+dataJam = pd.read_csv("./data/hour.csv")
 
 #Judul Dashboard
 st.title("📊 Dashboard Penyewaan Sepeda")
-
 #Sidebar
 st.sidebar.title("🔍 Filter Data")
 view_option = st.sidebar.radio(
