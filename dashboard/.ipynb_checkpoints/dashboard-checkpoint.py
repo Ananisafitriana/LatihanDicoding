@@ -22,24 +22,6 @@ if view_option == "Statistik Deskriptif":
 
     st.subheader("📊 Statistik Deskriptif Data Jam")
     st.write(dataJam.describe())
-
-    # EDA Bivariate
-    st.subheader("🔄 EDA Bivariate: Korelasi Antar Variabel")
-    numeric_data = dataHari.select_dtypes(include=["number"])
-    correlation_matrix = numeric_data.corr().dropna(how="all", axis=0).dropna(how="all", axis=1)
-    st.write(correlation_matrix)
-
-    # EDA Numerikal
-    st.subheader("📉 EDA Numerikal: Ringkasan Data Numerik")
-    st.write(dataHari[["temp", "hum", "windspeed", "casual", "registered", "cnt"]].describe())
-
-
-    # EDA Kategorikal
-    st.subheader("📊 EDA Kategorikal: Distribusi Data Kategori")
-    categorical_cols = dataHari.select_dtypes(include=["object"]).columns
-    for col in categorical_cols:
-        st.write(f"\nDistribusi {col}:")
-        st.write(dataHari[col].value_counts())
     
 
 # Visualisasi
