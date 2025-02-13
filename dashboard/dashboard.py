@@ -10,7 +10,7 @@ dataHari['dteday'] = pd.to_datetime(dataHari['dteday'])
 st.title("📊 Dashboard Penyewaan Sepeda")
 st.sidebar.title("🔍 Filter Data")
 
-# Filtertanggal
+# Filter tanggal
 start_date = st.sidebar.date_input("Mulai Tanggal", dataHari['dteday'].min())
 end_date = st.sidebar.date_input("Sampai Tanggal", dataHari['dteday'].max())
 
@@ -22,7 +22,6 @@ selected_season = st.sidebar.multiselect("Pilih Musim", options=season_options.k
 weather_options = {1: "Clear", 2: "Mist", 3: "Light Snow/Rain", 4: "Heavy Rain/Snow"}
 selected_weather = st.sidebar.multiselect("Pilih Cuaca", options=weather_options.keys(), format_func=lambda x: weather_options[x])
 
-# Terapkan filter
 data_filtered = dataHari[(dataHari['dteday'] >= pd.Timestamp(start_date)) & (dataHari['dteday'] <= pd.Timestamp(end_date))]
 if selected_season:
     data_filtered = data_filtered[data_filtered['season'].isin(selected_season)]
@@ -45,6 +44,46 @@ if view_option == "Statistik Deskriptif":
     # EDA Numerikal
     st.subheader("📉 EDA Numerikal: Ringkasan Data Numerik")
     st.write(data_filtered[["temp", "hum", "windspeed", "casual", "registered", "cnt"]].describe())
+
+    # Agregasi penyewa per bulan
+    st.subheader("📉 Penyewa Per Bulan")
+    monthly_avg = dataHari.groupby("mnth")["cnt"].mean().reset_index()
+    monthly_avg = monthly_avg.sort_values(by="cnt", ascending=False) 
+    st.write(monthly_avg)
+
+    # Agregasi Penyewa per musim
+    st.subheader("📉 Penyewa Per Musim")
+    season_labels = {1: "Spring", 2: "Summer", 3: "Fall", 4: "Winter"}
+    avg_users_hari = dataHari.groupby("season")["cnt"].mean()
+    avg_users_jam = dataJam.groupby("season")["cnt"].mean()
+    avg_users_hari.index = avg_users_hari.index.map(season_labels)
+    avg_users_jam.index = avg_users_jam.index.map(season_labels)
+
+    df_summary = pd.DataFrame({
+        "Rata-rata Harian": avg_users_hari,
+        "Rata-rata Per Jam": avg_users_jam
+    })
+    st.write(df_summary)
+
+    # Agregasi Pengaruh Hari Kerja
+    st.subheader("📉 Penyewa Pengaruh Hari Kerja")
+    workday_effect = dataHari.groupby("workingday")[["casual", "registered"]].mean()
+    st.write(workday_effect)
+
+    # Agregasi Binning Suhu
+    st.subheader("📊 Rata-rata Penyewaan Berdasarkan Kategori Suhu")
+
+    bins = [0, 0.3, 0.6, 1.0]  
+    labels = ["Dingin", "Sedang", "Hangat"]
+
+    dataHari["temp_category"] = pd.cut(dataHari["temp"], bins=bins, labels=labels, include_lowest=True)
+
+    temp_summary = dataHari.groupby("temp_category", observed=False)["cnt"].mean().reset_index()
+    temp_summary["temp_category"] = temp_summary["temp_category"].astype(str)
+
+    st.write(temp_summary)
+
+
 
     
 # Visualisasi Penyewaan
