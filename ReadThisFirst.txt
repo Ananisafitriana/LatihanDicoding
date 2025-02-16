@@ -1,0 +1,44 @@
+Mohon dibaca ini terlebih dahulu dikarenakan ada beberapa yang sudah saya kerjakan revisinya namun tidak terdeteksi
+Untuk run streamlit melalui terminal dengan : streamlit run dashboard/dashboard.py 
+atau bisa membuka link streamlit https://latihandicodingannisa.streamlit.app/
+
+Pada berkas README.md tambahkan instruksi untuk melakukan install library dari berkas requirements.txt.
+==> Sudah lengkap
+
+Notebook
+
+Hindari menjalankan banyak code untuk menampilkan dataframe dalam 1 cell code. Lakukan seperti pada module latihan. Code dijalankan di tiap-tiap cell code ketika ingin menampilkan data atau informasi dari dataset. Karena jupyter notebook memiliki keterbatasan dalam menampilkan informasi jika yang ditampilkan terlalu panjang dalam satu cell code.
+Agar data yang ditampilkan menjadi lebih baik dan rapi.
+Kamu bisa menampilkan dataframe tanpa menggunakan fungsi print() atau dengan mengikuti cara berikut.
+Contoh:
+df.head()
+df.describe()
+df.info()
+Jalankan di tiap cell yang berbeda. Jika dalam 1 cell, hanya baris code terakhir yang akan ditampilkan datanya. perbaiki juga pada bagian lain yang serupa.
+==> saya sudah memisahkan pembacaan dataframe pada dua dataset yang berbeda di dua cell yang berbeda
+
+
+Terdapat variabel undefined. Hal ini akan terjadi error dan menyebabkan cell code berikutnya tidak dapat berjalan dengan baik.
+Semua kode dari awal sampai akhir project berhubungan dan prosesnya berjalan secara runtut/sistematis. Satu tahapan akan mempengaruhi hasil dari tahapan berikutnya. Oleh karena itu, pada submission ini beberapa kriteria lainnya belum dapat diperiksa lebih lanjut.
+Pastikan kamu menjalankan ulang semua cell code. Perhatikan juga jika ada hal lainnya yang berubah terkait perubahan yang telah dilakukan dan jangan lupa untuk memeriksa lagi notebook secara komprehensif dan teliti apakah submission sudah memenuhi seluruh ketentuan.
+==> Sudah diperbaiki dan diperangkat saya tidak terjadi masalah
+
+
+Dashboard Streamlit
+
+Dashboard yang kamu buat belum dapat berjalan dengan baik secara local karena path dataset yang kurang tepat. Kamu bisa menggunakan secara langsung pada working directory/ relative path.
+Contoh:
+1. Jika berkas .py dan dataset pada folder atau directory yang sama:
+data = pd.read_csv("data.csv")
+2. Jika dataset berada dalam subfolder yang berbeda tetapi masih berada dalam satu folder dengan berkas .py, maka bisa diakses dengan menentukan path relatifnya.:
+data = pd.read_csv("dataset/data.csv")
+3. Jika dataset berada satu tingkat di atas berkas .py, misalnya file data.csv berada dalam folder dataset, maka dapat diakses dengan perintah berikut:
+data = pd.read_csv("../dataset/data.csv")
+==> Jika menjalankan cara kedua dan ketiga, data tidak berhasil ke load, oleh karena itu saya menggunakan ./data/day.csv
+==> Saya tidak menggunakan cara pertama karena menyesuaikan dengan cara stuktur file yang diberikan
+
+
+Tentunya hal di atas dapat disesuaikan dengan kebutuhan dan environment pengerjaan submission-mu. Path tersebut menyebabkan dashboard tidak berjalan dengan baik karena perbedaan path dengan Tim Reviewer. Pastikan dashboard dapat berjalan dengan lancar secara local di komputermu dengan menjalankan instruksi yang kamu buat pada berkas README.md sebelum melakukan submit ulang.
+Perlu diperhatikan bahwa dashboard sederhana mengharuskan minimal menampilkan 2 visualisasi data dari 2 pertanyaan bisnis yang diajukan, pastikan apa yang kamu tampilkan di dashboard sesuai dengan analisamu di notebook. Untuk membuat dashboard kamu bisa pelajari kembali Latihan Membuat Dashboard Sederhana dengan Streamlit.
+Kamu diharuskan membuat minimal 1 fitur interaktif. Salah satu fitur interaktif yang dapat ditambahkan adalah filtering berdasarkan tanggal. Selain itu, kamu juga bisa menambahkan fitur filtering lainnya, seperti berdasarkan musim (season), cuaca (weathersit), kategori produk, state, stasiun, jenis polutan atau parameter lain yang sesuai dengan dataset yang kamu gunakan.
+==> Filtering sudah ada setelah revisi kedua
